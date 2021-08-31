@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<log xes.version="1849.2016" xes.features="">
+    <extension name="Organizational" prefix="org" uri="http://www.xes-standard.org/org.xesext"></extension>
+    <extension name="Concept" prefix="concept" uri="http://www.xes-standard.org/concept.xesext"></extension>
+    <extension name="Time" prefix="time" uri="http://www.xes-standard.org/time.xesext"></extension>
+    <global scope="trace">
+        <string key="concept:name" value="UNKNOWN"></string>
+        <string key="Purchasing Document" value="UNKNOWN"></string>
+        <string key="Item" value="UNKNOWN"></string>
+        <string key="Item Type" value=""></string>
+        <boolean key="GR-Based Inv. Verif." value="false"></boolean>
+        <boolean key="Goods Receipt" value="false"></boolean>
+        <string key="Source" value="UNKNOWN"></string>
+        <string key="Purch. Doc. Category name" value="UNKNOWN"></string>
+        <string key="Company" value="UNKNOWN"></string>
+        <string key="Spend classification text" value="UNKNOWN"></string>
+        <string key="Spend area text" value="UNKNOWN"></string>
+        <string key="Sub spend area text" value="UNKNOWN"></string>
+        <string key="Vendor" value="UNKNOWN"></string>
+        <string key="Name" value="UNKNOWN"></string>
+        <string key="Document Type" value="UNKNOWN"></string>
+        <string key="Item Category" value="UNKNOWN"></string>
+    </global>
+    <global scope="event">
+        <string key="concept:name" value="UNKNOWN"></string>
+        <date key="time:timestamp" value="1970-01-01T00:00:00.000Z"></date>
+        <string key="org:resource" value="UNKNOWN"></string>
+        <string key="User" value="UNKNOWN"></string>
+        <float key="Cumulative net worth (EUR)" value="0.0"></float>
+    </global>
+    <classifier name="Event Name" scope="event" keys="concept:name"></classifier>
+    <classifier name="Resource" scope="event" keys="org:resource"></classifier>
+    <string key="concept:name" value="BPI Challenge 2019"></string>
+    <trace>
+        <string key="Spend area text" value="CAPEX &amp; SOCS"></string>
+        <string key="Company" value="companyID_0000"></string>
+        <string key="Document Type" value="EC Purchase order"></string>
+        <string key="Sub spend area text" value="Facility Management"></string>
+        <string key="Purchasing Document" value="2000000000"></string>
+        <string key="Purch. Doc. Category name" value="Purchase order"></string>
+        <string key="Vendor" value="vendorID_0000"></string>
+        <string key="Item Type" value="Standard"></string>
+        <string key="Item Category" value="3-way match, invoice before GR"></string>
+        <string key="Spend classification text" value="NPR"></string>
+        <string key="Source" value="sourceSystemID_0000"></string>
+        <string key="Name" value="vendor_0000"></string>
+        <boolean key="GR-Based Inv. Verif." value="false"></boolean>
+        <string key="Item" value="00001"></string>
+        <string key="concept:name" value="2000000000_00001"></string>
+        <boolean key="Goods Receipt" value="true"></boolean>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Created"></string>
+            <float key="Cumulative net worth (EUR)" value="298.0"></float>
+            <date key="time:timestamp" value="2018-01-02T12:53:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Complete"></string>
+            <float key="Cumulative net worth (EUR)" value="298.0"></float>
+            <date key="time:timestamp" value="2018-01-02T13:53:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Awaiting Approval"></string>
+            <float key="Cumulative net worth (EUR)" value="298.0"></float>
+            <date key="time:timestamp" value="2018-01-02T13:53:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Document Completed"></string>
+            <float key="Cumulative net worth (EUR)" value="298.0"></float>
+            <date key="time:timestamp" value="2018-01-02T13:53:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: In Transfer to Execution Syst."></string>
+            <float key="Cumulative net worth (EUR)" value="298.0"></float>
+            <date key="time:timestamp" value="2018-01-02T13:53:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Ordered"></string>
+            <float key="Cumulative net worth (EUR)" value="298.0"></float>
+            <date key="time:timestamp" value="2018-01-02T13:53:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Change was Transmitted"></string>
+            <float key="Cumulative net worth (EUR)" value="298.0"></float>
+            <date key="time:timestamp" value="2018-01-02T13:53:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_000"></string>
+            <string key="org:resource" value="user_000"></string>
+            <string key="concept:name" value="Create Purchase Order Item"></string>
+            <float key="Cumulative net worth (EUR)" value="298.0"></float>
+            <date key="time:timestamp" value="2018-01-02T13:53:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="NONE"></string>
+            <string key="org:resource" value="NONE"></string>
+            <string key="concept:name" value="Vendor creates invoice"></string>
+            <float key="Cumulative net worth (EUR)" value="298.0"></float>
+            <date key="time:timestamp" value="2018-01-02T22:59:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_000"></string>
+            <string key="org:resource" value="user_000"></string>
+            <string key="concept:name" value="Record Goods Receipt"></string>
+            <float key="Cumulative net worth (EUR)" value="298.0"></float>
+            <date key="time:timestamp" value="2018-03-06T06:44:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_001"></string>
+            <string key="org:resource" value="user_001"></string>
+            <string key="concept:name" value="Record Invoice Receipt"></string>
+            <float key="Cumulative net worth (EUR)" value="298.0"></float>
+            <date key="time:timestamp" value="2018-03-06T07:53:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_002"></string>
+            <string key="org:resource" value="user_002"></string>
+            <string key="concept:name" value="Clear Invoice"></string>
+            <float key="Cumulative net worth (EUR)" value="298.0"></float>
+            <date key="time:timestamp" value="2018-03-29T13:06:00.000Z"></date>
+        </event>
+    </trace>
+    <trace>
+        <string key="Spend area text" value="Marketing"></string>
+        <string key="Company" value="companyID_0000"></string>
+        <string key="Document Type" value="EC Purchase order"></string>
+        <string key="Sub spend area text" value="Marketing Support Services"></string>
+        <string key="Purchasing Document" value="2000000001"></string>
+        <string key="Purch. Doc. Category name" value="Purchase order"></string>
+        <string key="Vendor" value="vendorID_0001"></string>
+        <string key="Item Type" value="Service"></string>
+        <string key="Item Category" value="3-way match, invoice after GR"></string>
+        <string key="Spend classification text" value="NPR"></string>
+        <string key="Source" value="sourceSystemID_0000"></string>
+        <string key="Name" value="vendor_0001"></string>
+        <boolean key="GR-Based Inv. Verif." value="true"></boolean>
+        <string key="Item" value="00001"></string>
+        <string key="concept:name" value="2000000001_00001"></string>
+        <boolean key="Goods Receipt" value="true"></boolean>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Created"></string>
+            <float key="Cumulative net worth (EUR)" value="557.0"></float>
+            <date key="time:timestamp" value="2018-01-03T08:49:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Complete"></string>
+            <float key="Cumulative net worth (EUR)" value="557.0"></float>
+            <date key="time:timestamp" value="2018-01-03T09:49:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Awaiting Approval"></string>
+            <float key="Cumulative net worth (EUR)" value="557.0"></float>
+            <date key="time:timestamp" value="2018-01-03T09:49:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Document Completed"></string>
+            <float key="Cumulative net worth (EUR)" value="557.0"></float>
+            <date key="time:timestamp" value="2018-01-03T09:49:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Ordered"></string>
+            <float key="Cumulative net worth (EUR)" value="557.0"></float>
+            <date key="time:timestamp" value="2018-01-03T09:49:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: In Transfer to Execution Syst."></string>
+            <float key="Cumulative net worth (EUR)" value="557.0"></float>
+            <date key="time:timestamp" value="2018-01-03T09:49:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Change was Transmitted"></string>
+            <float key="Cumulative net worth (EUR)" value="557.0"></float>
+            <date key="time:timestamp" value="2018-01-03T09:49:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_000"></string>
+            <string key="org:resource" value="user_000"></string>
+            <string key="concept:name" value="Create Purchase Order Item"></string>
+            <float key="Cumulative net worth (EUR)" value="557.0"></float>
+            <date key="time:timestamp" value="2018-01-03T09:49:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="NONE"></string>
+            <string key="org:resource" value="NONE"></string>
+            <string key="concept:name" value="Vendor creates invoice"></string>
+            <float key="Cumulative net worth (EUR)" value="557.0"></float>
+            <date key="time:timestamp" value="2018-01-10T22:59:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_000"></string>
+            <string key="org:resource" value="user_000"></string>
+            <string key="concept:name" value="Record Goods Receipt"></string>
+            <float key="Cumulative net worth (EUR)" value="557.0"></float>
+            <date key="time:timestamp" value="2018-01-16T12:09:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="NONE"></string>
+            <string key="org:resource" value="NONE"></string>
+            <string key="concept:name" value="Record Service Entry Sheet"></string>
+            <float key="Cumulative net worth (EUR)" value="557.0"></float>
+            <date key="time:timestamp" value="2018-01-16T12:09:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_004"></string>
+            <string key="org:resource" value="user_004"></string>
+            <string key="concept:name" value="Record Invoice Receipt"></string>
+            <float key="Cumulative net worth (EUR)" value="557.0"></float>
+            <date key="time:timestamp" value="2018-01-16T14:44:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_005"></string>
+            <string key="org:resource" value="user_005"></string>
+            <string key="concept:name" value="Clear Invoice"></string>
+            <float key="Cumulative net worth (EUR)" value="557.0"></float>
+            <date key="time:timestamp" value="2018-03-08T12:21:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_003"></string>
+            <string key="org:resource" value="user_003"></string>
+            <string key="concept:name" value="SRM: In Transfer to Execution Syst."></string>
+            <float key="Cumulative net worth (EUR)" value="557.0"></float>
+            <date key="time:timestamp" value="2019-01-17T10:58:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_003"></string>
+            <string key="org:resource" value="user_003"></string>
+            <string key="concept:name" value="SRM: Transfer Failed (E.Sys.)"></string>
+            <float key="Cumulative net worth (EUR)" value="557.0"></float>
+            <date key="time:timestamp" value="2019-01-17T10:58:00.000Z"></date>
+        </event>
+    </trace>
+    <trace>
+        <string key="Spend area text" value="Marketing"></string>
+        <string key="Company" value="companyID_0000"></string>
+        <string key="Document Type" value="EC Purchase order"></string>
+        <string key="Sub spend area text" value="Digital Marketing"></string>
+        <string key="Purchasing Document" value="2000000002"></string>
+        <string key="Purch. Doc. Category name" value="Purchase order"></string>
+        <string key="Vendor" value="vendorID_0002"></string>
+        <string key="Item Type" value="Service"></string>
+        <string key="Item Category" value="3-way match, invoice after GR"></string>
+        <string key="Spend classification text" value="NPR"></string>
+        <string key="Source" value="sourceSystemID_0000"></string>
+        <string key="Name" value="vendor_0002"></string>
+        <boolean key="GR-Based Inv. Verif." value="true"></boolean>
+        <string key="Item" value="00001"></string>
+        <string key="concept:name" value="2000000002_00001"></string>
+        <boolean key="Goods Receipt" value="true"></boolean>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Created"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-01-04T13:17:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Complete"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-01-04T14:17:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Awaiting Approval"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-01-04T14:17:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Document Completed"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-01-04T14:17:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Ordered"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-01-04T14:17:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: In Transfer to Execution Syst."></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-01-04T14:17:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="SRM: Change was Transmitted"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-01-04T14:17:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_000"></string>
+            <string key="org:resource" value="user_000"></string>
+            <string key="concept:name" value="Create Purchase Order Item"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-01-04T14:17:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_000"></string>
+            <string key="org:resource" value="user_000"></string>
+            <string key="concept:name" value="Record Goods Receipt"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-02-06T14:53:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="NONE"></string>
+            <string key="org:resource" value="NONE"></string>
+            <string key="concept:name" value="Record Service Entry Sheet"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-02-06T14:53:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="NONE"></string>
+            <string key="org:resource" value="NONE"></string>
+            <string key="concept:name" value="Vendor creates invoice"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-02-06T22:59:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_000"></string>
+            <string key="org:resource" value="user_000"></string>
+            <string key="concept:name" value="Cancel Goods Receipt"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-02-08T10:19:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_000"></string>
+            <string key="org:resource" value="user_000"></string>
+            <string key="concept:name" value="Record Goods Receipt"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-08-16T10:20:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="NONE"></string>
+            <string key="org:resource" value="NONE"></string>
+            <string key="concept:name" value="Record Service Entry Sheet"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-08-16T10:20:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="batch_00"></string>
+            <string key="org:resource" value="batch_00"></string>
+            <string key="concept:name" value="Record Invoice Receipt"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-08-16T10:41:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_002"></string>
+            <string key="org:resource" value="user_002"></string>
+            <string key="concept:name" value="Clear Invoice"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2018-08-16T13:03:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_003"></string>
+            <string key="org:resource" value="user_003"></string>
+            <string key="concept:name" value="SRM: In Transfer to Execution Syst."></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2019-01-17T10:59:00.000Z"></date>
+        </event>
+        <event>
+            <string key="User" value="user_003"></string>
+            <string key="org:resource" value="user_003"></string>
+            <string key="concept:name" value="SRM: Transfer Failed (E.Sys.)"></string>
+            <float key="Cumulative net worth (EUR)" value="76210.0"></float>
+            <date key="time:timestamp" value="2019-01-17T10:59:00.000Z"></date>
+        </event>
+    </trace>
+</log>
