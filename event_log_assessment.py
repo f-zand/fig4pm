@@ -309,35 +309,35 @@ def event_log_assessment(log):
     print()
 
     return 'Measure Evaluation Completed! - Time needed: ' + str(time_needed)
-#
-log_csv = pd.read_csv('BPI_2019.csv', sep=',')
-log_csv = dataframe_utils.convert_timestamp_columns_in_df(log_csv)
-log_csv = log_csv.sort_values('event time:timestamp')
-log_csv.rename(columns={"case concept:name": "case:concept:name"}, inplace=True)
+# #
+# log_csv = pd.read_csv('BPI_2019.csv', sep=',')
+# log_csv = dataframe_utils.convert_timestamp_columns_in_df(log_csv)
+# log_csv = log_csv.sort_values('timestamp')
+# log_csv.rename(columns={"case": "case:concept:name"}, inplace=True)
 
-# find variants to perform sampling (optional)
-log_csv2 = log_csv.groupby('case:concept:name')['concept:name'].apply(tuple).reset_index(name = 'variants')
+# # find variants to perform sampling (optional)
+# log_csv2 = log_csv.groupby('case:concept:name')['concept:name'].apply(tuple).reset_index(name = 'variants')
 
-#define total sample size desired (optional)
-N = round(0.01 * log_csv['case:concept:name'].nunique())
-log_csv3 = log_csv.copy()
-#perform stratified random sampling (optional)
-log_csv2 = log_csv2.groupby('variants', group_keys=False).apply(lambda x: x.sample(int(np.rint(N*len(x)/len(log_csv2))))).sample(frac=1).reset_index(drop=True)
-# count events per case (mandatory because of the exception in the code)
-log_csv3 = log_csv3.groupby('case:concept:name')['concept:name'].count().reset_index(name="count")
-# filter out cases with only one event
-log_csv3= log_csv3[log_csv3['count'] > 1]
-#get final dataset
-log_csv4 = log_csv.merge(log_csv2, how = "inner", on = "case:concept:name").drop(columns=['variants'])
-log_csv4 = log_csv4.merge(log_csv3, how = "inner", on = "case:concept:name")
+# #define total sample size desired (optional)
+# N = round(0.01 * log_csv['case:concept:name'].nunique())
+# log_csv3 = log_csv.copy()
+# #perform stratified random sampling (optional)
+# log_csv2 = log_csv2.groupby('variants', group_keys=False).apply(lambda x: x.sample(int(np.rint(N*len(x)/len(log_csv2))))).sample(frac=1).reset_index(drop=True)
+# # count events per case (mandatory because of the exception in the code)
+# log_csv3 = log_csv3.groupby('case:concept:name')['concept:name'].count().reset_index(name="count")
+# # filter out cases with only one event
+# log_csv3= log_csv3[log_csv3['count'] > 1]
+# #get final dataset
+# log_csv4 = log_csv.merge(log_csv2, how = "inner", on = "case:concept:name").drop(columns=['variants'])
+# log_csv4 = log_csv4.merge(log_csv3, how = "inner", on = "case:concept:name")
 
-# convert dataframe to log
-parameters = {log_converter.Variants.TO_EVENT_LOG.value.Parameters.CASE_ID_KEY: 'case:concept:name'}
-event_log = log_converter.apply(log_csv4, parameters=parameters, variant=log_converter.Variants.TO_EVENT_LOG)
-# run the program
-event_log_assessment(event_log)
+# # convert dataframe to log
+# parameters = {log_converter.Variants.TO_EVENT_LOG.value.Parameters.CASE_ID_KEY: 'case:concept:name'}
+# event_log = log_converter.apply(log_csv4, parameters=parameters, variant=log_converter.Variants.TO_EVENT_LOG)
+# # run the program
+# event_log_assessment(event_log)
 
 # # when file is .xes
-# from pm4py.objects.log.importer.xes import importer as xes_importer
-# log = xes_importer.apply('ExampleLog.xes')
-# event_log_assessment(log)
+from pm4py.objects.log.importer.xes import importer as xes_importer
+log = xes_importer.apply('ExampleLog.xes')
+event_log_assessment(log)
