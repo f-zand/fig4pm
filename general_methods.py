@@ -1,5 +1,7 @@
 # GENERAL METHODS USED THROUGHOUT THE EVENT LOG ASSESSMENT TOOL
 import numpy as np
+from pm4py.objects.dfg.retrieval.log import native
+from pm4py.statistics.traces.log import case_statistics
 
 # Returns the names of all events in the log
 def event_names(log):
@@ -16,15 +18,13 @@ def case_list(log):
     for case in log:
         case_rep = []
         for event in case:
-            case_rep.append(event['concept:name'])
+            case_rep.append(event["concept:name"])
         log_rep.append(case_rep)
     return np.asarray(log_rep)
 
 
 # Returns a dictionary including the variants of the log as the key and their count as a value
 def variant_dict(log):
-    from pm4py.statistics.traces.log import case_statistics
-
     var_dict = sorted(case_statistics.get_variant_statistics(log), key=lambda x: x['count'], reverse=True)
     return var_dict
 
@@ -35,7 +35,7 @@ def variant_list(log):
     for case in log:
         case_rep = []
         for event in case:
-            case_rep.append(event['concept:name'])
+            case_rep.append(event["concept:name"])
         if case_rep not in log_rep:
             log_rep.append(case_rep)
     return np.asarray(log_rep)
@@ -43,8 +43,6 @@ def variant_list(log):
 
 # Returns a list including all frequencies of variants corresponding to the order in variant_list
 def variant_count_list(log):
-    from pm4py.statistics.traces.log import case_statistics
-
     variants_dict = sorted(case_statistics.get_variant_statistics(log), key=lambda x: x['count'], reverse=True)
     var_count_list = []
     for item in variants_dict:
@@ -61,9 +59,6 @@ def ranking_dict(log):
 
 # Creates an adjacency matrix for the complete log, on which a directed graph can be based
 def adjacency_matrix_directed(log):
-    from pm4py.objects.dfg.retrieval.log import native
-    import numpy as np
-
     event_ranking = ranking_dict(log)
     connections = [list(i) for i in [*(native(log))]]
 
@@ -84,8 +79,6 @@ def adjacency_matrix_directed(log):
 
 # Creates an adjacency matrix for the complete log, on which an undirected graph can be based
 def adjacency_matrix_undirected(log):
-    from pm4py.objects.dfg.retrieval.log import native
-    import numpy as np
 
     event_ranking = ranking_dict(log)
     connections = [list(i) for i in [*(native(log))]]
@@ -108,9 +101,6 @@ def adjacency_matrix_undirected(log):
 
 # Create markov chain adjacency matrix for the creation of a weighted graph
 def markov_chain_adjacency_matrix(log):
-    from pm4py.objects.dfg.retrieval.log import native
-    import numpy as np
-
     # Create relevant dictionaries
     number_for_event = ranking_dict(log)
     event_for_number = dict((y, x) for x, y in number_for_event.items())

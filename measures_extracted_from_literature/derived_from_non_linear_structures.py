@@ -1,68 +1,56 @@
 # METHODS IMPLEMENTING MEASURES EXTRACTED FROM THE LITERATURE
 # DERIVED FROM NON-LINEAR STRUCTURES OF THE EVENT LOG
+from graph_creation import create_directed_graph
+import networkx as nx
+from pm4py.statistics.start_activities.log.get import get_start_activities
+from pm4py.statistics.end_activities.log.get import get_end_activities
 
-
-# Number of nodes in the graph (i.e. events in the log) (N)
+# 1. Number of nodes in the graph (i.e. events in the log) (N)
 def number_of_nodes(log):
-    from graph_creation import create_directed_graph
-    import networkx as nx
     graph = create_directed_graph(log)
     return len(nx.nodes(graph))
 
 
-# Number of arcs in the graph (i.e. transitions between events in the log) (A)
+# 2. Number of arcs in the graph (i.e. transitions between events in the log) (A)
 def number_of_arcs(log):
-    from graph_creation import create_directed_graph
-    import networkx as nx
-    graph = create_directed_graph(log)
-    return len(nx.edges(graph))
+    return len(nx.edges(create_directed_graph(log)))
 
 
-# Coefficient of network connectivity / complexity (i.e. number of arcs / number of nodes) (gcnc)
+# 3. Coefficient of network connectivity / complexity (i.e. number of arcs / number of nodes) (gcnc)
 def coefficient_of_network_connectivity(log):
     return number_of_arcs(log) / number_of_nodes(log)
 
 
-# Average node degree (i.e. (2 x number of arcs) / number of nodes) (gand)
+# 4. Average node degree (i.e. (2 x number of arcs) / number of nodes) (gand)
 def average_node_degree(log):
     return (2 * number_of_arcs(log)) / number_of_nodes(log)
 
 
-# Maximum node degree (gmnd)
+# 5. Maximum node degree (gmnd)
 def maximum_node_degree(log):
-    from graph_creation import create_directed_graph
-    import networkx as nx
-    graph = create_directed_graph(log)
-    degrees = list(i[1] for i in nx.degree(graph))
-    return max(degrees)
+    return max(list(i[1] for i in nx.degree(create_directed_graph(log))))
 
 
-# Density (i.e. A / (N x (N-1)) (gdn)
+# 6. Density (i.e. A / (N x (N-1)) (gdn)
 def density(log):
-    from graph_creation import create_directed_graph
-    import networkx as nx
-    graph = create_directed_graph(log)
-    return nx.density(graph)
+    return nx.density(create_directed_graph(log))
 
 
-# Structure (i.e. 1 - (A / (N^2))) (gst)
+# 7. Structure (i.e. 1 - (A / (N^2))) (gst)
 def structure(log):
     return 1 - (number_of_arcs(log) / (number_of_nodes(log)**2))
 
 
-# Absolute cyclomatic number (i.e. A - N + 1) (gcn)
+# 8. Absolute cyclomatic number (i.e. A - N + 1) (gcn)
 def cyclomatic_number(log):
-    cn = number_of_arcs(log) - number_of_nodes(log) + 1
-    return cn
+    return (number_of_arcs(log) - number_of_nodes(log) + 1)
 
 
-# Graph diameter, i.e. longest path through the process without accounting for cycles (gdm)
+# 9. Graph diameter, i.e. longest path through the process without accounting for cycles (gdm)
 def graph_diameter(log, threshold=0.05):
     import numpy as np
-    from pm4py.statistics.start_activities.log.get import get_start_activities
-    from pm4py.statistics.end_activities.log.get import get_end_activities
     from graph_creation import create_directed_weighted_graph
-    import networkx as nx
+    
     # create list of start and end events as well as graph
     start_events = [*get_start_activities(log)]
     end_events = [*get_end_activities(log)]
@@ -92,23 +80,20 @@ def graph_diameter(log, threshold=0.05):
     return max(simple_path_length)
 
 
-# Absolute number of cut vertices, i.e. articulation points,
-# that separate the graph into several components when removed (gcv)
+# 10. Absolute number of cut vertices, i.e. articulation points,
+#     that separate the graph into several components when removed (gcv)
 def number_of_cut_vertices(log):
     from graph_creation import create_undirected_graph
-    import networkx as nx
-    graph = create_undirected_graph(log)
-    return len(list(nx.articulation_points(graph)))
+    return len(list(nx.articulation_points(create_undirected_graph(log))))
 
 
-# Separability ratio (gsepr)
+# 11. Separability ratio (gsepr)
 def separability_ratio(log):
     return number_of_cut_vertices(log) / number_of_nodes(log)
 
 
-# Sequentiality ratio (gseqr)
+# 12. Sequentiality ratio (gseqr)
 def sequentiality_ratio(log):
-    from graph_creation import create_directed_graph
     # retrieve graph and list of in- and out-degrees of each node
     graph = create_directed_graph(log)
     in_degree_list = graph.in_degree
@@ -126,10 +111,8 @@ def sequentiality_ratio(log):
     return non_connector_edges / number_of_arcs(log)
 
 
-# Cyclicitly (gcy)
+# 13. Cyclicitly (gcy)
 def cyclicity(log):
-    import networkx as nx
-    from graph_creation import create_directed_graph
     # retrieve cycles and set of nodes contained in the cycles
     graph = create_directed_graph(log)
     cycles = list(nx.simple_cycles(graph))
@@ -140,7 +123,7 @@ def cyclicity(log):
     return len(list(cycle_nodes)) / number_of_nodes(log)
 
 
-# Affinity (gaf)
+# 14. Affinity (gaf)
 def affinity(log):
     from general_methods import case_list, jaccard_similarity
     # create transition representation of all traces in the log
@@ -159,13 +142,8 @@ def affinity(log):
     return total_overlap / (len(traces) * (len(traces) - 1))
 
 
-# Simple Path Process Complexity (gspc)
+# 15. Simple Path Process Complexity (gspc)
 def simple_path_complexity(log, threshold=0.05):
-    from pm4py.statistics.start_activities.log.get import get_start_activities
-    from pm4py.statistics.end_activities.log.get import get_end_activities
-    from graph_creation import create_directed_graph
-    import networkx as nx
-
     # create list of start and end events as well as graph
     start_events = [*get_start_activities(log)]
     end_events = [*get_end_activities(log)]

@@ -1,77 +1,67 @@
-# METHODS IMPLEMENTING MEASURES EXTRACTED FROM THE LITERATURE
-# DERIVED FROM LINEAR STRUCTURES OF THE EVENT LOG
-
-# Import relevant modules
+###############################################################################
+'''Necessery liberaries'''
+###############################################################################
+from pm4py.statistics.traces.generic.log import case_statistics
 from general_methods import event_names, self_loop_per_trace_overview, repetition_per_trace_overview
 
+###############################################################################
+'''Derived From Linear Structure functions'''
+###############################################################################
 
-# Returns the number of events in the event log (ne)
+# 1. Returns the number of events in the event log (ne)
 def total_number_of_events(log):
     return sum(len(case) for case in log)
 
 
-# Returns the number of event classes in the event log (nec)
+# 2. Returns the number of event classes in the event log (nec)
 def total_number_of_event_classes(log):
     return len(event_names(log))
 
 
-# Returns the number of traces in the event log (nt)
+# 3. Returns the number of traces in the event log (nt)
 def total_number_of_traces(log):
     return len(log)
 
 
-# Returns the number of trace classes (i.e. variants) in the event log (ntc)
+# 4. Returns the number of trace classes (i.e. variants) in the event log (ntc)
 def total_number_of_trace_classes(log):
-    from pm4py.statistics.traces.log import case_statistics
     return len(case_statistics.get_variant_statistics(log))
 
 
-# Returns the average trace length (atl)
-# (i.e. total number of events in the log divided by total number of cases (traces) in the log)
+# 5. Returns the average trace length (atl)
+#    (i.e. total number of events in the log divided by total number of cases (traces) in the log)
 def average_trace_length(log):
     return total_number_of_events(log) / total_number_of_traces(log)
 
 
-# Returns length of shortest trace (mitl)
+# 6. Returns length of shortest trace (mitl)
 def minimum_trace_length(log):
-    trace_length_list = []
-    for case in log:
-        trace_length_list.append(len(case))
-    return min(trace_length_list)
+    return min([len(case) for case in log])
 
 
-# Returns length of longest trace (matl)
+# 7. Returns length of longest trace (matl)
 def maximum_trace_length(log):
-    trace_length_list = []
-    for case in log:
-        trace_length_list.append(len(case))
-    return max(trace_length_list)
+    return min([len(case) for case in log])
 
 
-# Average trace size (i.e. number of event classes per case (trace)) (ats)
+# 8. Average trace size (i.e. number of event classes per case (trace)) (ats)
 def average_trace_size(log):
-    trace_size = 0
-    for case in log:
-        activity_list = set()
-        for event in case:
-            activity_list.add(event["concept:name"])
-        trace_size += len(activity_list)
-    return trace_size / len(log)
+    return len([(event["concept:name"]) for case in log for event in case]) / len(log)
 
 
-# Absolute number of start events (nsec)
+# 9. Absolute number of start events (nsec)
 def number_of_distinct_start_events(log):
     from pm4py.statistics.start_activities.log import get
     return len(get.get_start_activities(log))
 
 
-# Absolute number of end events (ntec)
+# 10. Absolute number of end events (ntec)
 def number_of_distinct_end_events(log):
     from pm4py.statistics.end_activities.log import get
     return len(get.get_end_activities(log))
 
 
-# Absolute number of traces including a self-loop of at least length 1 (ntsl)
+# 11. Absolute number of traces including a self-loop of at least length 1 (ntsl)
 def absolute_number_of_traces_with_self_loop(log):
     self_loop_overview = self_loop_per_trace_overview(log)
     traces_with_self_loop = 0
@@ -81,7 +71,7 @@ def absolute_number_of_traces_with_self_loop(log):
     return traces_with_self_loop
 
 
-# Absolute number of traces including a repetition (excluding loops) (ntr)
+# 12. Absolute number of traces including a repetition (excluding loops) (ntr)
 def absoulute_number_of_traces_with_repetition(log):
     repetition_overview = repetition_per_trace_overview(log)
     traces_with_repetition = 0
@@ -91,27 +81,27 @@ def absoulute_number_of_traces_with_repetition(log):
     return traces_with_repetition
 
 
-# Relative number of start activities (rnsec)
+# 13. Relative number of start activities (rnsec)
 def relative_number_of_distinct_start_events(log):
     return number_of_distinct_start_events(log) / total_number_of_event_classes(log)
 
 
-# Relative number of end activities (rntec)
+# 14. Relative number of end activities (rntec)
 def relative_number_of_distinct_end_events(log):
     return number_of_distinct_end_events(log) / total_number_of_event_classes(log)
 
 
-# Relative number of traces including a self-loop of at least length 1 (rntsl)
+# 15. Relative number of traces including a self-loop of at least length 1 (rntsl)
 def relative_number_of_traces_with_self_loop(log):
     return absolute_number_of_traces_with_self_loop(log) / total_number_of_traces(log)
 
 
-# Relative number of traces including a repetition (excluding loops) (rntr)
+# 16. Relative number of traces including a repetition (excluding loops) (rntr)
 def relative_number_of_traces_with_repetition(log):
     return absoulute_number_of_traces_with_repetition(log) / total_number_of_traces(log)
 
 
-# Average number of self-loops per trace (anslt)
+# 17. Average number of self-loops per trace (anslt)
 def average_number_of_self_loops_per_trace(log):
     loop_overview = self_loop_per_trace_overview(log)
     loops_in_traces = 0
@@ -121,7 +111,7 @@ def average_number_of_self_loops_per_trace(log):
     return loops_in_traces / total_number_of_traces(log)
 
 
-# Maximum number of self-loops per trace (manslt)
+# 18. Maximum number of self-loops per trace (manslt)
 def maximum_number_of_self_loops_per_trace(log):
     loop_overview = self_loop_per_trace_overview(log)
     maximum_number_self_loops = 0
@@ -131,7 +121,7 @@ def maximum_number_of_self_loops_per_trace(log):
     return maximum_number_self_loops
 
 
-# Average size of self-loops per trace (only accounting for traces that contain a self-loop) (asslt)
+# 19. Average size of self-loops per trace (only accounting for traces that contain a self-loop) (asslt)
 def average_size_of_self_loops_per_trace(log):
     loop_overview = self_loop_per_trace_overview(log)
     self_loop_traces = 0
@@ -147,7 +137,7 @@ def average_size_of_self_loops_per_trace(log):
     return result
 
 
-# Maximum size of self-loops for any trace (masslt)
+# 20. Maximum size of self-loops for any trace (masslt)
 def maximum_size_of_self_loops_per_trace(log):
     loop_overview = self_loop_per_trace_overview(log)
     loop_size_in_traces = 0
@@ -158,12 +148,12 @@ def maximum_size_of_self_loops_per_trace(log):
     return loop_size_in_traces
 
 
-# Absolute number of distinct traces per 100 traces (tcpht)
+# 21. Absolute number of distinct traces per 100 traces (tcpht)
 def number_of_distinct_traces_per_hundred_traces(log):
     return total_number_of_trace_classes(log) / total_number_of_traces(log) * 100
 
 
-# Absolute trace coverage: 80 percent level (tco)
+# 22. Absolute trace coverage: 80 percent level (tco)
 def absolute_trace_coverage(log):
     from general_methods import variant_count_list
     variant_count_list = variant_count_list(log)
@@ -178,7 +168,7 @@ def absolute_trace_coverage(log):
     return distinct_traces
 
 
-# Absolute trace coverage: 80 percent level (rtco)
+# 23. Absolute trace coverage: 80 percent level (rtco)
 def relative_trace_coverage(log):
     from general_methods import variant_count_list
     variant_count_list = variant_count_list(log)
@@ -193,18 +183,18 @@ def relative_trace_coverage(log):
     return distinct_traces / len(variant_count_list)
 
 
-# Event density (i.e. average trace size / average trace length) (edn)
+# 24. Event density (i.e. average trace size / average trace length) (edn)
 def event_density(log):
     return average_trace_size(log) / average_trace_length(log)
 
 
-# Traces heterogeneity rate (i.e. ln(variant_count) / ln(case_count)) (thr)
+# 25. Traces heterogeneity rate (i.e. ln(variant_count) / ln(case_count)) (thr)
 def traces_heterogeneity_rate(log):
     from math import log as natural_log
     return natural_log(total_number_of_trace_classes(log)) / natural_log(total_number_of_traces(log))
 
 
-# Trace similarity rate (tsr)
+# 26. Trace similarity rate (tsr)
 def trace_similarity_rate(log):
     from editdistance import distance
     from general_methods import variant_list
@@ -219,19 +209,19 @@ def trace_similarity_rate(log):
     return (1 / (total_number_of_trace_classes(log) * (total_number_of_trace_classes(log) - 1))) * dist
 
 
-# Complexity factor (cf)
+# 27. Complexity factor (cf)
 def complexity_factor(log):
     from math import log as natural_log
     ntc, tsr, edn, ats = total_number_of_trace_classes(log), trace_similarity_rate(log), event_density(log), average_trace_size(log)
     return (natural_log(ntc) ** ((1 - tsr) + edn)) * ats
 
 
-# Simple trace diversity (i.e. 1 - (average trace size / total number of activities)) (std)
+# 28. Simple trace diversity (i.e. 1 - (average trace size / total number of activities)) (std)
 def simple_trace_diversity(log):
     return 1 - (average_trace_size(log) / total_number_of_event_classes(log))
 
 
-# Advanced trace diversity (i.e. weighted levenshtein distance between all traces) (atd)
+# 29. Advanced trace diversity (i.e. weighted levenshtein distance between all traces) (atd)
 def advanced_trace_diversity(log):
     from editdistance import distance
     from general_methods import case_list
@@ -241,7 +231,7 @@ def advanced_trace_diversity(log):
     return (1 / (total_number_of_traces(log) * (total_number_of_traces(log) - 1) * average_trace_length(log))) * dist
 
 
-# Trace entropy (tentr)
+# 30. Trace entropy (tentr)
 def trace_entropy(log):
     from general_methods import variant_count_list
     from scipy.stats import entropy
@@ -252,7 +242,7 @@ def trace_entropy(log):
     return entropy(probabilities, base=2)
 
 
-# Prefix entropy (flattened) (prentr)
+# 31. Prefix entropy (flattened) (prentr)
 def prefix_entropy(log):
     from general_methods import variant_list
     from scipy.stats import entropy
@@ -273,7 +263,7 @@ def prefix_entropy(log):
     return entropy(probabilities, base=2)
 
 
-# All-block entropy (flattened) (abentr)
+# 32. All-block entropy (flattened) (abentr)
 def all_block_entropy(log):
     from general_methods import variant_list
     from scipy.stats import entropy
