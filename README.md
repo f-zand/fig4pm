@@ -1,4 +1,3 @@
-####
 ###### This repository was build by Peter D. from University of Mannheim as a part of a master thesis study.
 
 ## Where to start?
