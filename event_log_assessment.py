@@ -232,7 +232,7 @@ def event_log_assessment(log):
 ###############################################################################
 '''Loading CSV event log file'''
 ###############################################################################
-event_log = pm4py.format_dataframe(pd.read_csv('event log\complex-eventlog.csv', sep=';'),
+event_log = pm4py.format_dataframe(pd.read_csv('EventLog\complex-eventlog.csv', sep=';'),
                                     case_id='ValueAddedServiceID+BatchID',
                                     activity_key='Activity_Description',
                                     timestamp_key='StartTimeStamp')
