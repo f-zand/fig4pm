@@ -1,10 +1,9 @@
 # METHODS FOR NETWORKX GRAPH CREATION
+from general_methods import ranking_dict, adjacency_matrix_directed, adjacency_matrix_undirected, markov_chain_adjacency_matrix
+import networkx as nx
 
 # Create directed graph
 def create_directed_graph(log):
-    from general_methods import ranking_dict, adjacency_matrix_directed
-    import networkx as nx
-
     DG = nx.DiGraph()
     matrix = adjacency_matrix_directed(log)
     number_for_event = ranking_dict(log)
@@ -18,9 +17,6 @@ def create_directed_graph(log):
 
 # Create undirected graph
 def create_undirected_graph(log):
-    from general_methods import ranking_dict, adjacency_matrix_undirected
-    import networkx as nx
-
     DG = nx.Graph()
     matrix = adjacency_matrix_undirected(log)
     number_for_event = ranking_dict(log)
@@ -35,9 +31,6 @@ def create_undirected_graph(log):
 
 # Create directed weighted graph
 def create_directed_weighted_graph(log, threshold=0.05):
-    from general_methods import ranking_dict, markov_chain_adjacency_matrix
-    import networkx as nx
-
     DG = nx.DiGraph()
     matrix = markov_chain_adjacency_matrix(log)
     number_for_event = ranking_dict(log)
@@ -51,9 +44,6 @@ def create_directed_weighted_graph(log, threshold=0.05):
 
 # Create undirected weighted graph
 def create_undirected_weighted_graph(log, threshold=0.05):
-    from general_methods import ranking_dict, markov_chain_adjacency_matrix
-    import networkx as nx
-
     DG = nx.Graph()
     matrix = markov_chain_adjacency_matrix(log)
     number_for_event = ranking_dict(log)
