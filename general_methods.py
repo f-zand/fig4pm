@@ -1,7 +1,7 @@
 # GENERAL METHODS USED THROUGHOUT THE EVENT LOG ASSESSMENT TOOL
 import numpy as np
 from pm4py.objects.dfg.retrieval.log import native
-from pm4py.statistics.traces.log import case_statistics
+from pm4py.statistics.traces.generic.log import case_statistics
 
 # Returns the names of all events in the log
 def event_names(log):
