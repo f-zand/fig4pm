@@ -304,6 +304,9 @@ def event_log_assessment(log):
     print()
     print()
     print(pd.DataFrame(list(SLS.items()), columns = ['*self linear structure*', '*value*']))
+    print()
+    print()
+    print(pd.DataFrame(list(SNLS.items()), columns = ['*self non-linear structure*', '*value*']))
 
     t1 = time()
     print()
