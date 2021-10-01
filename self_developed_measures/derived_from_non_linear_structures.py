@@ -1,22 +1,17 @@
 # METHODS IMPLEMENTING SELF-DEVELOPED MEASURES
 # DERIVED FROM NON-LINEAR STRUCTURES OF THE EVENT LOG
+from graph_creation import create_undirected_graph, create_directed_graph
+import networkx as nx
+import numpy as np
 
-
-# Number of graph communities using greedy modularity
+# 1. Number of graph communities using greedy modularity
 def number_of_graph_communities(log):
-    from graph_creation import create_undirected_graph
-    import networkx as nx
-
     graph = create_undirected_graph(log)
     communities = list(nx.algorithms.community.greedy_modularity_communities(graph))
     return len(communities)
 
-
-# Cut vertex outgoing degree
+# 2. Cut vertex outgoing degree
 def maximum_cut_vertex_outgoing_degree(log):
-    import networkx as nx
-    from graph_creation import create_undirected_graph, create_directed_graph
-
     undirected_graph = create_undirected_graph(log)
     directed_graph = create_directed_graph(log)
     cuts = list(nx.articulation_points(undirected_graph))
@@ -27,12 +22,8 @@ def maximum_cut_vertex_outgoing_degree(log):
             max_outgoing_degree = outgoing_degree
     return max_outgoing_degree
 
-
-# Cut vertex outgoing degree
+# 3. Cut vertex outgoing degree
 def cut_vertex_independent_path(log):
-    import networkx as nx
-    from graph_creation import create_undirected_graph, create_directed_graph
-
     undirected_graph = create_undirected_graph(log)
     directed_graph = create_directed_graph(log)
     cuts = list(nx.articulation_points(undirected_graph))
@@ -49,15 +40,13 @@ def cut_vertex_independent_path(log):
     return max_disjoint_paths
 
 
-# Simple path minimum jaccard similarity
+# 4. Simple path minimum jaccard similarity
 def simple_path_minimum_jaccard_similarity(log, threshold=0.05):
     from pm4py.statistics.start_activities.log.get import get_start_activities
     from pm4py.statistics.end_activities.log.get import get_end_activities
     from general_methods import jaccard_similarity
-    import numpy as np
     from tqdm import tqdm
     from graph_creation import create_directed_weighted_graph
-    import networkx as nx
 
     # Retrieve start and end events
     start_events = [*get_start_activities(log)]
@@ -101,7 +90,7 @@ def simple_path_minimum_jaccard_similarity(log, threshold=0.05):
     return min(similarity)
 
 
-# Syntactic node similarity
+# 5. Syntactic node similarity
 def syntactic_node_similarity(log):
     from editdistance import distance
     from general_methods import event_names
