@@ -1,6 +1,6 @@
 # METHODS IMPLEMENTING SELF-DEVELOPED MEASURES
 # DERIVED FROM LINEAR STRUCTURES OF THE EVENT LOG
-
+import numpy as np
 
 # 1. Outlier evaluation of start event frequencies
 def start_event_frequency_evaluation(log, lower_bound, threshold):
