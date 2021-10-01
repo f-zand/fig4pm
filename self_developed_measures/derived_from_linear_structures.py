@@ -181,7 +181,6 @@ def spatial_proximity_connectedness(log):
 def spatial_proximity_abstraction_evaluation(log, avg=True, threshold=0.9):
     from measures_extracted_from_literature.derived_from_linear_structures import average_trace_length
     from spatial_proximity import spatial_proximity_matrix
-    import numpy as np
 
     if avg == True:
         avg_trace_len = average_trace_length(log)
@@ -199,7 +198,6 @@ def spatial_proximity_abstraction_evaluation(log, avg=True, threshold=0.9):
 
 # Event dependency abstraction evaluation
 def event_dependency_abstraction_evaluation(log):
-    import numpy as np
     from event_dependency import event_dependency_matrix
 
     event_dependency_list = event_dependency_matrix(log).flatten()
