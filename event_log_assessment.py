@@ -7,6 +7,7 @@ from time import time
 from pm4py.objects.conversion.log import converter as log_converter
 from measures_extracted_from_literature.derived_from_linear_structures import *
 from measures_extracted_from_literature.derived_from_non_linear_structures import *
+from self_developed_measures.derived_from_linear_structures import *
 
 ###############################################################################
 '''Event log assessment function'''
@@ -213,6 +214,71 @@ def event_log_assessment(log):
     # 2.15. Simple Path Process Complexity (gspc)
     NLS['simple path complexity'] = simple_path_complexity(log)
 
+    # 3. derived from self linear structures
+    SLS = {}
+
+    # 3.1. Outlier evaluation of start event frequencies
+    SLS['start event frequency evaluation'] = start_event_frequency_evaluation(log, 'highest_occurrence', 0.05)
+
+    # 3.2. Outlier evaluation of end event frequencies
+    SLS['end event frequency evaluation'] = end_event_frequency_evaluation(log, 'highest_occurrence', 0.05)
+
+    # 3.3. Outlier evaluation of event frequencies
+    SLS['event frequency evaluation'] = event_frequency_evaluation(log, 'highest_occurrence', 0.05)
+
+    # 3.4. Outlier evaluation of trace frequencies
+    SLS['trace frequency evaluation'] = trace_frequency_evaluation(log, 'highest_occurrence', 0.05)
+
+    # 3.5. Outlier evaluation of event dependency
+    SLS['event dependency evaluation'] = event_dependency_evaluation(log)
+
+    # 3.6. Outlier evaluation of trace length
+    SLS['trace length evaluation'] = trace_length_evaluation(log)
+
+    # 3.7. Absolute number of outlying traces detected via unsupervised outlier detection algorithm
+    SLS['number of outlying traces'] = number_of_outlying_traces(log)
+
+    # 3.8 Relative number of outlying traces detected via unsupervised outlier detection algorithm
+    SLS['relative number of outlying traces'] = relative_number_of_outlying_traces(log)
+
+    # 3.9. Event profile average euclidean distance
+    SLS['event profile average euclidean distance'] = event_profile_average_euclidean_distance(log)
+
+    # 3.10. Event profile average cosine distance
+    SLS['event profile average cosine similarity'] = event_profile_average_cosine_similarity(log)
+
+    # 3.11. Transition profile average euclidean distance
+    SLS['transition profile average euclidean distancedistance'] = transition_profile_average_euclidean_distance(log)
+
+    # 3.12. Transition profile average cosine distance
+    SLS['transition profile average cosine similarity'] = transition_profile_average_cosine_similarity(log)
+
+    # 3.13. Event profile maximum cosine distance
+    SLS['event profile minimum cosine similarity'] = event_profile_minimum_cosine_similarity(log)
+
+    # 3.14. Transition profile maximum cosine distance
+    SLS['transition profile minimum cosine similarity'] = transition_profile_minimum_cosine_similarity(log)
+
+    # 3.15. Average spatial proximity
+    SLS['average spatial proximity'] = average_spatial_proximity(log)
+
+    # 3.16. Spatial proximity connectedness
+    SLS['spatial proximity connectedness'] = spatial_proximity_connectedness(log)
+
+    # 3.17. Spatial proximity abstraction evaluation
+    SLS['spatial proximity abstraction evaluation'] = spatial_proximity_abstraction_evaluation(log)
+
+    # 3.18 Event dependency abstraction evaluation
+    SLS['event dependency abstraction evaluation'] = event_dependency_abstraction_evaluation(log)
+
+    # 3.19. Triple abstraction evaluation
+    SLS['triple abstraction evaluation'] = triple_abstraction_evaluation(log)
+
+    # 3.20. Event class triple abstraction evaluation
+    SLS['event class triple abstraction evaluation'] = event_class_triple_abstraction_evaluation(log)
+
+    # 4. derived from self non-linear structures
+    SNLS = {}
 
 
 
@@ -220,7 +286,9 @@ def event_log_assessment(log):
     print()
     print()
     print(pd.DataFrame(list(NLS.items()), columns = ['*non-linear structure*', '*value*']))
-
+    print()
+    print()
+    print(pd.DataFrame(list(SLS.items()), columns = ['*self linear structure*', '*value*']))
 
     t1 = time()
     print()
