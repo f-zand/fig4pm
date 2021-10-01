@@ -8,6 +8,7 @@ from pm4py.objects.conversion.log import converter as log_converter
 from measures_extracted_from_literature.derived_from_linear_structures import *
 from measures_extracted_from_literature.derived_from_non_linear_structures import *
 from self_developed_measures.derived_from_linear_structures import *
+from self_developed_measures.derived_from_non_linear_structures import *
 
 ###############################################################################
 '''Event log assessment function'''
@@ -280,6 +281,20 @@ def event_log_assessment(log):
     # 4. derived from self non-linear structures
     SNLS = {}
 
+    # 4.1. Number of graph communities using greedy modularity
+    SNLS['number of graph communities'] = number_of_graph_communities(log)
+
+    # 4.2. Cut vertex outgoing degree
+    SNLS['maximum cut vertex outgoing degree'] = maximum_cut_vertex_outgoing_degree(log)
+
+    # 4.3. Cut vertex outgoing degree
+    SNLS['cut vertex independent path'] = cut_vertex_independent_path(log)
+
+    # 4.4. Simple path minimum jaccard similarity
+    SNLS['simple path minimum jaccard similarity'] = simple_path_minimum_jaccard_similarity(log)
+
+    # 4.5. Syntactic node similarity
+    SNLS['syntactic node similarity'] = syntactic_node_similarity(log)
 
 
     print(pd.DataFrame(list(LS.items()), columns = ['*linear structure*', '*value*']))
