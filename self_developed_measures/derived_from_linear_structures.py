@@ -1,8 +1,8 @@
 # METHODS IMPLEMENTING SELF-DEVELOPED MEASURES
 # DERIVED FROM LINEAR STRUCTURES OF THE EVENT LOG
+import numpy as np
 
-
-# Outlier evaluation of start event frequencies
+# 1. Outlier evaluation of start event frequencies
 def start_event_frequency_evaluation(log, lower_bound, threshold):
     from pm4py.statistics.start_activities.log import get
     from measures_extracted_from_literature.derived_from_linear_structures import total_number_of_events
@@ -19,7 +19,7 @@ def start_event_frequency_evaluation(log, lower_bound, threshold):
     return counter / len(start_event_frequency)
 
 
-# Outlier evaluation of end event frequencies
+# 2. Outlier evaluation of end event frequencies
 def end_event_frequency_evaluation(log, lower_bound, threshold):
     from pm4py.statistics.end_activities.log import get
     from measures_extracted_from_literature.derived_from_linear_structures import total_number_of_events
@@ -36,7 +36,7 @@ def end_event_frequency_evaluation(log, lower_bound, threshold):
     return counter / len(end_event_frequency)
 
 
-# Outlier evaluation of event frequencies
+# 3. Outlier evaluation of event frequencies
 def event_frequency_evaluation(log, lower_bound, threshold):
     from pm4py.statistics.attributes.log.get import get_attribute_values
     from measures_extracted_from_literature.derived_from_linear_structures import total_number_of_events
@@ -58,7 +58,7 @@ def event_frequency_evaluation(log, lower_bound, threshold):
     return counter / len(event_frequency)
 
 
-# Outlier evaluation of trace frequencies
+# 4. Outlier evaluation of trace frequencies
 def trace_frequency_evaluation(log, lower_bound, threshold):
     from general_methods import variant_count_list
     from measures_extracted_from_literature.derived_from_linear_structures import total_number_of_traces
@@ -80,7 +80,7 @@ def trace_frequency_evaluation(log, lower_bound, threshold):
     return counter / len(trace_frequency)
 
 
-# Outlier evaluation of event dependency
+# 5. Outlier evaluation of event dependency
 def event_dependency_evaluation(log, threshold=0.05):
     from event_dependency import event_dependency_matrix
     import numpy as np
@@ -94,7 +94,7 @@ def event_dependency_evaluation(log, threshold=0.05):
     return counter / nonzero
 
 
-# Outlier evaluation of trace length
+# 6. Outlier evaluation of trace length
 def trace_length_evaluation(log):
     from measures_extracted_from_literature.derived_from_linear_structures import total_number_of_traces
     from outlier_detection import box_whisker_plot_evaluation
@@ -106,56 +106,56 @@ def trace_length_evaluation(log):
     return (outliers[0] + outliers[1]) / total_number_of_traces(log)
 
 
-# Absolute number of outlying traces detected via unsupervised outlier detection algorithm
+# 7. Absolute number of outlying traces detected via unsupervised outlier detection algorithm
 def number_of_outlying_traces(log):
     from outlier_detection import outlier_detection_feature_based_unsupervised
     return outlier_detection_feature_based_unsupervised(log, 'IForest', 0.05, 0.9)[0]
 
 
-# Relative number of outlying traces detected via unsupervised outlier detection algorithm
+# 8. Relative number of outlying traces detected via unsupervised outlier detection algorithm
 def relative_number_of_outlying_traces(log):
     from measures_extracted_from_literature.derived_from_linear_structures import total_number_of_traces
     from outlier_detection import outlier_detection_feature_based_unsupervised
     return outlier_detection_feature_based_unsupervised(log, 'IForest', 0.05, 0.9)[0] / total_number_of_traces(log)
 
 
-# Event profile average euclidean distance
+# 9. Event profile average euclidean distance
 def event_profile_average_euclidean_distance(log):
     from profile_distances.event_profile import event_profile_distance_all_variants
     return event_profile_distance_all_variants(log, 'euclidean')[1]
 
 
-# Event profile average cosine distance
+# 10. Event profile average cosine distance
 def event_profile_average_cosine_similarity(log):
     from profile_distances.event_profile import event_profile_distance_all_variants
     return event_profile_distance_all_variants(log, 'cosine')[2]
 
 
-# Transition profile average euclidean distance
+# 11. Transition profile average euclidean distance
 def transition_profile_average_euclidean_distance(log):
     from profile_distances.k_gram_profile import k_gram_distance_all_variants
     return k_gram_distance_all_variants(log, 2, 'euclidean')[1]
 
 
-# Transition profile average cosine distance
+# 12. Transition profile average cosine distance
 def transition_profile_average_cosine_similarity(log):
     from profile_distances.k_gram_profile import k_gram_distance_all_variants
     return k_gram_distance_all_variants(log, 2, 'cosine')[2]
 
 
-# Event profile maximum cosine distance
+# 13. Event profile maximum cosine distance
 def event_profile_minimum_cosine_similarity(log):
     from profile_distances.event_profile import event_profile_minimum_cosine_all_variants
     return event_profile_minimum_cosine_all_variants(log)
 
 
-# Transition profile maximum cosine distance
+# 14. Transition profile maximum cosine distance
 def transition_profile_minimum_cosine_similarity(log):
     from profile_distances.k_gram_profile import k_gram_minimum_cosine_all_variants
     return k_gram_minimum_cosine_all_variants(log, 2)
 
 
-# Average spatial proximity
+# 15. Average spatial proximity
 def average_spatial_proximity(log):
     from measures_extracted_from_literature.derived_from_linear_structures import total_number_of_event_classes
     from spatial_proximity import spatial_proximity_matrix
@@ -164,7 +164,7 @@ def average_spatial_proximity(log):
     return sum(spatial_proximity_list) / (total_number_of_event_classes(log) * (total_number_of_event_classes(log) - 1))
 
 
-# Spatial proximity connectedness
+# 16. Spatial proximity connectedness
 def spatial_proximity_connectedness(log):
     from measures_extracted_from_literature.derived_from_linear_structures import total_number_of_event_classes
     from spatial_proximity import spatial_proximity_matrix
@@ -177,11 +177,10 @@ def spatial_proximity_connectedness(log):
     return 1 - ((counter - total_number_of_event_classes(log)) / (total_number_of_event_classes(log) * (total_number_of_event_classes(log) - 1)))
 
 
-# Spatial proximity abstraction evaluation
+# 17. Spatial proximity abstraction evaluation
 def spatial_proximity_abstraction_evaluation(log, avg=True, threshold=0.9):
     from measures_extracted_from_literature.derived_from_linear_structures import average_trace_length
     from spatial_proximity import spatial_proximity_matrix
-    import numpy as np
 
     if avg == True:
         avg_trace_len = average_trace_length(log)
@@ -197,9 +196,8 @@ def spatial_proximity_abstraction_evaluation(log, avg=True, threshold=0.9):
     return counter / nonzero
 
 
-# Event dependency abstraction evaluation
+# 18. Event dependency abstraction evaluation
 def event_dependency_abstraction_evaluation(log):
-    import numpy as np
     from event_dependency import event_dependency_matrix
 
     event_dependency_list = event_dependency_matrix(log).flatten()
@@ -211,7 +209,7 @@ def event_dependency_abstraction_evaluation(log):
     return counter / nonzero
 
 
-# Triple abstraction evaluation
+# 19. Triple abstraction evaluation
 def triple_abstraction_evaluation(log):
     from pm4py.objects.dfg.retrieval.log import freq_triples
 
@@ -226,7 +224,7 @@ def triple_abstraction_evaluation(log):
     return len(target_triples) / len(triples)
 
 
-# Event class triple abstraction evaluation
+# 20. Event class triple abstraction evaluation
 def event_class_triple_abstraction_evaluation(log):
     from pm4py.objects.dfg.retrieval.log import freq_triples
     from measures_extracted_from_literature.derived_from_linear_structures import total_number_of_event_classes
