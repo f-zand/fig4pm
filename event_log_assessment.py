@@ -9,6 +9,7 @@ from measures_extracted_from_literature.derived_from_linear_structures import *
 from measures_extracted_from_literature.derived_from_non_linear_structures import *
 from self_developed_measures.derived_from_linear_structures import *
 from self_developed_measures.derived_from_non_linear_structures import *
+import os, sys, getopt
 
 ###############################################################################
 '''Event log assessment function'''
@@ -311,28 +312,75 @@ def event_log_assessment(log):
     t1 = time()
     print()
     print('-------------------------------------------')
-    print('runing time:', t1 - t0)
+    print('runing time:', t1 - t0 , 'seconds')
     print('-------------------------------------------')
     print()
 
 ###############################################################################
 '''Loading CSV event log file'''
 ###############################################################################
-event_log = pm4py.format_dataframe(pd.read_csv('complex-eventlog.csv', sep=';'),
-                                    case_id='ValueAddedServiceID+BatchID',
-                                    activity_key='Activity_Description',
-                                    timestamp_key='StartTimeStamp')
+def main(argv):
+    if len(argv) == 0:
+        print("Please define your event log in the command line. Try -h for more information.")
+        sys.exit(2)
 
-event_log = log_converter.apply(event_log)
+    eventlog = delimiter = caseid = activityid = timestamp = ''
+    file_name = file_ext = ''
+    # sample arguments: 
+    # python3 event_log_assessment.py -eventlog -e sample_eventlog.csv --delimiter ';' --caseid 'ValueAddedServiceID+BatchID' --activityid Activity_Description --timestamp StartTimeStamp
+    # python3 event_log_assessment.py -e sample_eventlog.csv -d ';' -c 'ValueAddedServiceID+BatchID' -a Activity_Description -t StartTimeStamp
+    try:
+       opts, args = getopt.getopt(argv,"he:d:c:a:t:",["eventlog=","delimiter=","caseid=","activityid=","timestamp="])
+    except getopt.GetoptError:
+       print ("event_log_assessment.py -e 'event_log_file' -d 'delimeterchar_character' -c 'case_id_column' -a 'activity_column' -t 'timestamp_column'")
+       sys.exit(2)
+    
+    for opt, arg in opts:
+       if opt == '-h':
+          print ("[!] Usage: ")
+          print ("       event_log_assessment.py -e event_log_file -d delimeter_character -c 'case_id_column' -a 'activity_column' -t 'timestamp_column'")
+          print ("       event_log_assessment.py -e event_log_file --delimiter ';' --caseid 'case_id_column' --activityid 'activity_column' --timestamp 'timestamp_column'")
+          print ("[!] Use ' ' to wrap parameters, e.g., -d ';' -c 'column name contains space character'")
+          sys.exit()
+       elif opt in ("-e", "--eventlog"):
+          eventlog = arg
+       elif opt in ("-d", "--delimiter"):
+          delimiter = arg
+       elif opt in ("-c", "--caseid"):
+          caseid = arg
+       elif opt in ("-a", "--activityid"):
+          activityid = arg
+       elif opt in ("-t", "--timestamp"):
+          timestamp = arg
+    
+    # check weather an extension exists. For example "a.csv" has 5 characters, so lets keep the minimum file name length equalt to 5 characters.
+    if len(eventlog) > 4:
+        file_name, file_ext = os.path.splitext(eventlog)
+    else:
+        print("[x] Illigal file name or missing file extension.")
+        sys.exit(2)
+        
+    # TODO: remove after debugging:
+    print("event log is ", eventlog)
+    print("delimiter is ", delimiter)
+    print("case id column is ", caseid)
+    print("activity id column is ", activityid)
+    print("timestamp column is ", timestamp)
 
-print()
-print('-------------------------------------------')
-print('Event Log Imported!')
-print('-------------------------------------------')
+    if (file_ext == ".csv"):
+        event_log = pm4py.format_dataframe(pd.read_csv(eventlog, sep=delimiter),
+                                    case_id=caseid,
+                                    activity_key=activityid,
+                                    timestamp_key=timestamp)
+        print('[o] Event log has beeb successfully imported.')
+        event_log = log_converter.apply(event_log)
+        print('[o] Event log has beeb successfully transformed.')
+        event_log_assessment(event_log)
+    if (file_ext == ".xes"):
+        print(" [x] XES event logs are currently not supported. This feature will be added soon :) ")
 
-###############################################################################
-''''Runing Program'''
-###############################################################################
-event_log_assessment(event_log)
+    # sample csv call before implementing parameters:
+    #     event_log = pm4py.format_dataframe(pd.read_csv('sample_eventlog.csv', sep=';'), case_id='ValueAddedServiceID+BatchID', activity_key='Activity_Description', timestamp_key='StartTimeStamp')
 
-###############################################################################
+if __name__ == "__main__":
+    main(sys.argv[1:]) # ommiting the first parameter because it is always contains the name of the script, i.e., event_log_assessment.py
