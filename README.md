@@ -1,7 +1,17 @@
 ###### This repository was build by Peter D. from University of Mannheim as a part of a master thesis study.
 #
 ## Where to start?
-You can load your `.csv` or `.xes` event log by making changes in `event_log_assessment.py` file.
+You can load your `.csv` or `.xes` event log by simply defining them on the command line. For example: 
+   ```bash
+   python3 event_log_assessment.py -e 'sample_eventlog.csv' -d ';' -c 'ValueAddedServiceID+BatchID' -a 'Activity_Description' -t 'StartTimeStamp'
+   ```
+
+   Use `-h` for more information:
+
+   ```bash
+   python3 event_log_assessment.py -h
+   ```
+
 
 ## Event_Log_Assessment
 This repository contains a tool for assessing a variety of event log characteristics via log-based features. The features are utilized for the recommendation of specific pre-discovery actions while also allowing for sub-log comparison.
